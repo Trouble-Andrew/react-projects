@@ -1,5 +1,7 @@
 import React from 'react';
 import ExpenseList from './components/ExpenseList/ExpenseList';
+import NewExpense from 'components/NewExpense/NewExpense';
+import { NewExpenseData } from 'components/ExpenseForm/ExpenseFormProps';
 
 function App() {
   const expenses = [
@@ -24,9 +26,15 @@ function App() {
     },
   ];
 
+  function addExpenseHandler(expense: NewExpenseData) {
+    console.log('In App');
+    console.log(expense);
+  }
+
   return (
     <div>
       <h2>Let's get started!</h2>
+      <NewExpense onAddExpense={addExpenseHandler} />
       <ExpenseList expenses={expenses} />
     </div>
   );
