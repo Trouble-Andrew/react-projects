@@ -1,21 +1,17 @@
 import React from 'react';
-import './ExpenseList.scss';
+import './ExpensesList.scss';
 import ExpenseItem from '../ExpenseItem/ExpenseItem';
-import ExpensesFilter from 'components/ExpensesFilter/ExpensesFilter';
 
 import { ExpenseItemProps } from '../ExpenseItem/ExpenseItemProps';
 import { ExpenseListProps } from './ExpenseListProps';
 
-function ExpenseList({ expenses }: ExpenseListProps) {
-  const [year, setYear] = React.useState(String(new Date().getFullYear()));
-
-  function changeYearHandler(year: string) {
-    setYear(year);
+function ExpensesList({ expenses }: ExpenseListProps) {
+  if (expenses.length === 0) {
+    return <h2 className="expenses-list__fallback">Found no expenses.</h2>;
   }
 
   return (
-    <div className="expenses">
-      <ExpensesFilter currentYear={year} onChangeYear={changeYearHandler} />
+    <ul className="expenses-list">
       {expenses.map((expense: ExpenseItemProps) => (
         <ExpenseItem
           title={expense.title}
@@ -24,8 +20,8 @@ function ExpenseList({ expenses }: ExpenseListProps) {
           key={expense.id}
         />
       ))}
-    </div>
+    </ul>
   );
 }
 
-export default ExpenseList;
+export default ExpensesList;

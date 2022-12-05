@@ -8,7 +8,7 @@ import { ExpenseFormProps } from './ExpenseFormProps';
 //   enteredDate: string;
 // }
 
-function ExpenseForm(props: ExpenseFormProps) {
+function ExpenseForm({ onSaveExpenseData, onCancel }: ExpenseFormProps) {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
@@ -57,11 +57,11 @@ function ExpenseForm(props: ExpenseFormProps) {
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
-    props.onSaveExpenseData(expenseData);
+    onSaveExpenseData(expenseData);
     clearForm();
   }
 
@@ -114,7 +114,15 @@ function ExpenseForm(props: ExpenseFormProps) {
           />
         </div>
       </div>
+
       <div className="new-expense__actions">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="new-expense__cancel"
+        >
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
