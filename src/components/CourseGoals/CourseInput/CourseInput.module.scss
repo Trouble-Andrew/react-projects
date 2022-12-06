@@ -1,5 +1,16 @@
 .form-control {
   margin: 0.5rem 0;
+
+  &.invalid {
+    input {
+      border-color: red;
+      background: rgb(229, 166, 166);
+    }
+
+    label {
+      color: red;
+    }
+  }
 }
 
 .form-control label {
