@@ -3,3 +3,7 @@ export interface ErrorModalProps {
   message: string;
   onConfirm: () => void;
 }
+
+export interface BackdropProps {
+  onConfirm: () => void;
+}
