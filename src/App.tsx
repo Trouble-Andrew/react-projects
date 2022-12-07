@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
+import AddUser from 'components/AddUser/AddUser';
+import UsersList from 'components/UsersList/UsersList';
+import { User } from 'interfaces';
 
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+
+  function addUserHandler(userName: string, userAge: number) {
+    setUsers((prevUsers) => {
+      return [...prevUsers, { name: userName, age: userAge, id: nanoid() }];
+    });
+  }
+
   return (
-    <div>
-      <h2>Let's get started!</h2>
-      <p>This is also visible!</p>
-    </div>
+    <>
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={users} />
+    </>
   );
 }
 
