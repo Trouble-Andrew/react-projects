@@ -8,14 +8,16 @@ import { CartItem as CartItemInterface } from 'interfaces';
 
 function Cart({ onClose }: CartProps) {
   const cartCtx = useContext(CartContext);
-
-  console.log(cartCtx);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  function cartItemRemoveHandler() {}
+  function cartItemRemoveHandler(id: string) {
+    cartCtx.removeItem(id);
+  }
 
-  function cartItemAddHandler() {}
+  function cartItemAddHandler(item: CartItemInterface) {
+    cartCtx.addItem({ ...item, amount: 1 });
+  }
 
   const cartItems = (
     <ul className={styles['cart-items']}>

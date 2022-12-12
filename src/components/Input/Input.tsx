@@ -1,6 +1,5 @@
-import React, { ReactNode, forwardRef, useRef } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import styles from './Input.module.scss';
-// import { InputProps } from './InputProps';
 
 interface InputProps {
   label: string;
