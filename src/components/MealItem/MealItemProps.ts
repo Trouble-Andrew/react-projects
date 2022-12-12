@@ -3,4 +3,5 @@ export interface MealItemProps {
   name: string;
   description: string;
   price: number;
+  amount?: number;
 }
