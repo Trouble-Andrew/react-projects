@@ -1,36 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
 import useHttp from 'hooks/use-http';
-import { Json, Task } from 'interfaces';
+import { Task } from 'interfaces';
 import { BASE_URL } from './constants';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
-
-  const transformTasks = useCallback((data: Json[]) => {
-    const loadedTasks: Task[] = [];
-
-    for (const taskKey in data) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-    }
-
-    setTasks(loadedTasks);
-  }, [])
-
-  const httpData = useHttp(
-    {
-      url: `${BASE_URL}/tasks.json`,
-    },
-    transformTasks,
-  );
-
-  const { isLoading, error, sendRequest: fetchTasks } = httpData;
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    const transformTasks = (tasksObj: Task[]) => {
+      const loadedTasks = [];
+
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
+      }
+
+      setTasks(loadedTasks);
+    };
+
+    fetchTasks(
+      {
+        url: `${BASE_URL}/tasks.json`,
+        body: null,
+        method: '',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+      },
+      transformTasks,
+    );
+  }, [fetchTasks]);
 
   const taskAddHandler = (task: Task) => {
     setTasks((prevTasks) => prevTasks.concat(task));

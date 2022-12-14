@@ -8,7 +8,7 @@ interface TasksProps {
   items: Task[];
   error: string | null;
   loading: boolean;
-  onFetch: () => void;
+  onFetch: (...args: any) => void;
 }
 
 const Tasks = ({ items, error, loading, onFetch }: TasksProps) => {

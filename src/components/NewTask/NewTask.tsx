@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useHttp from 'hooks/use-http';
 import { Task } from 'interfaces';
 import { BASE_URL } from '../../constants';
 
@@ -10,38 +11,27 @@ interface NewTaskProps {
 }
 
 const NewTask = ({ onAddTask }: NewTaskProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { isLoading, error, sendRequest: sendTaskRequest } = useHttp();
+
+  const createTask = (taskText: string, taskData: Task) => {
+    const generatedId = taskData.name; // firebase-specific => "name" contains generated id
+
+    if (generatedId) {
+      const createdTask = { id: generatedId, text: taskText };
+      onAddTask(createdTask);
+    }
+  };
 
   const enterTaskHandler = async (taskText: string) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${BASE_URL}/tasks.json`, {
+    sendTaskRequest(
+      {
+        url: `${BASE_URL}/tasks.json`,
         method: 'POST',
-        body: JSON.stringify({ text: taskText }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
-
-      const data = await response.json();
-
-      const generatedId = data.name; // firebase-specific => "name" contains generated id
-      const createdTask = { id: generatedId, text: taskText };
-
-      onAddTask(createdTask);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || 'Something went wrong!');
-        return err.message;
-      }
-    }
-    setIsLoading(false);
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: { text: taskText },
+      },
+      createTask.bind(null, taskText),
+    );
   };
 
   return (
