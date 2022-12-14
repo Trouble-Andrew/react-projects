@@ -22,8 +22,6 @@ const TaskForm = ({loading, onEnterTask}: TaskFormProps) => {
     if (enteredValue.trim().length > 0) {
       onEnterTask(enteredValue);
     }
-
-    // return null;
   };
 
   return (

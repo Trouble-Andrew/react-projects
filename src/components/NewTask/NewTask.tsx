@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Task } from 'interfaces';
+import { BASE_URL } from '../../constants';
 
 import Section from '../UI/Section';
 import TaskForm from './TaskForm';
-import { BASE_URL } from '../../constants';
 
 interface NewTaskProps {
   onAddTask: (task: Task) => void;
