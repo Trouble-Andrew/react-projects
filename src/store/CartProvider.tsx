@@ -16,7 +16,10 @@ const defaultCartState: CartState = {
 
 type ACTIONTYPE =
   | { type: 'ADD'; payload: CartItem }
-  | { type: 'REMOVE'; payload: string };
+  | { type: 'REMOVE'; payload: string }
+  | {
+      type: 'CLEAR';
+    };
 
 function CartReducer(
   state: typeof defaultCartState,
@@ -72,6 +75,8 @@ function CartReducer(
       items: updatedItems,
       totalAmount: updatedTotalAmount,
     };
+  } else if (action.type === 'CLEAR') {
+    return defaultCartState;
   }
 
   return state;
@@ -91,11 +96,16 @@ function CartProvider({ children }: CartProviderProps) {
     dispatchCartAction({ type: 'REMOVE', payload: id });
   }
 
+  const clearCartHandler = function clearCartHandler() {
+    dispatchCartAction({ type: 'CLEAR' });
+  };
+
   const cartContext = {
     items: cartState?.items,
     totalAmount: cartState?.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
   return (

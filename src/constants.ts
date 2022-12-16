@@ -3,4 +3,5 @@ export const BASE_URL =
 
 export const DATA = {
   MEALS: '/meals.json',
+  ORDERS: '/orders.json',
 };
