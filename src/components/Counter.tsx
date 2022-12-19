@@ -6,8 +6,8 @@ import { counterActions } from '../store/index';
 import classes from './Counter.module.scss';
 
 const Counter = () => {
-  const counter = useSelector<State, number>((state) => state.counter);
-  const show = useSelector<State, boolean>((state) => state.showCounter);
+  const counter = useSelector<State, number>((state) => state.counter.counter);
+  const show = useSelector<State, boolean>((state) => state.counter.showCounter);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
