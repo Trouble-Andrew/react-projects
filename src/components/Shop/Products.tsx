@@ -1,17 +1,16 @@
-import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import ProductItem from './ProductItem';
 import classes from './Products.module.scss';
 
 const PRODUCTS = [
   {
-    id: nanoid(),
+    id: 'zh3AHmXtirbPQJP4o5mvc',
     price: 6,
     title: 'My first Book',
     description: 'This is a first product - amazing!',
   },
   {
-    id: nanoid(),
+    id: 'uaJN5ZphPkxVHPZ3xO_aO',
     price: 5,
     title: 'My second Book',
     description: 'This is a second product - amazing!',

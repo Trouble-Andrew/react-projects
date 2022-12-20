@@ -4,22 +4,30 @@ import { CartItem } from 'interfaces';
 export interface CartState {
   items: CartItem['item'][];
   totalQuantity: number;
+  changed: boolean;
 }
 
 const initialCartState: CartState = {
   items: [],
   totalQuantity: 0,
+  changed: false,
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initialCartState,
+
   reducers: {
+    replaceCart(state, action) {
+      state.totalQuantity = action.payload.totalQuantity ?? 0;
+      state.items = action.payload.items ?? [];
+    },
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
 
       state.totalQuantity++;
+      state.changed = true;
 
       if (!existingItem) {
         state.items.push({
@@ -42,6 +50,7 @@ const cartSlice = createSlice({
       );
 
       state.totalQuantity--;
+      state.changed = true;
 
       if (existingItem) {
         if (existingItem.quantity === 1) {

@@ -4,7 +4,7 @@ import UIReducer, { UIState } from './uiSlice';
 
 export interface State {
   cart: CartState;
-  ui: UIState
+  ui: UIState;
 }
 
 let store = configureStore({

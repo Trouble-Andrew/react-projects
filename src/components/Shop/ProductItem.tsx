@@ -6,8 +6,8 @@ import { ProductItem as ProductItemProps } from 'interfaces';
 import { cartActions } from 'store/cartSlice';
 
 const ProductItem = (props: ProductItemProps) => {
-  // const cart = useSelector<CartState, >(CardReducer);
   const dispatch = useDispatch();
+
   const { title, price, description, id } = props;
 
   const addToCartHandler = () => {
