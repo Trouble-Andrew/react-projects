@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import classes from './Comments.module.css';
+import classes from './Comments.module.scss';
 import NewCommentForm from './NewCommentForm';
 
 const Comments = () => {
