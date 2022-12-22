@@ -13,3 +13,7 @@ export interface RequestData {
   quoteId: string;
   commentData: string;
 }
+
+export interface Params {
+  quoteId: string;
+}

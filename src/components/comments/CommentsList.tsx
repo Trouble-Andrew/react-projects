@@ -1,7 +1,7 @@
 import React from 'react';
 import CommentItem from './CommentItem';
 import { Comment } from '../../interfaces';
-import classes from './CommentsList.module.css';
+import classes from './CommentsList.module.scss';
 
 interface CommentsListProps {
   comments: Comment[];
