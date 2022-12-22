@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './HighlightedQuote.module.scss';
-import { Quote as HighlightedQuoteProps } from 'interfaces';
+import { Quote } from 'interfaces';
 
-const HighlightedQuote = (props: HighlightedQuoteProps) => {
+const HighlightedQuote = (props: Pick<Quote, 'author' | 'text'>) => {
   return (
     <figure className={classes.quote}>
       <p>{props.text}</p>
