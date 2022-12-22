@@ -8,3 +8,8 @@ export interface Comment {
   id: string;
   text: string;
 }
+
+export interface RequestData {
+  quoteId: string;
+  commentData: string;
+}
