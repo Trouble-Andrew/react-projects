@@ -1,4 +1,3 @@
-import { Params } from 'interfaces';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router';
 
@@ -13,7 +12,7 @@ const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const { sendRequest, status, data: loadedComments } = useHttp(getAllComments);
 
-  const params = useParams<Params>();
+  const params = useParams();
   const { quoteId } = params;
 
   const startAddCommentHandler = () => {
@@ -57,7 +56,7 @@ const Comments = () => {
           Add a Comment
         </button>
       )}
-      {isAddingComment && (
+      {isAddingComment && params.quoteId && (
         <NewCommentForm
           quoteId={params.quoteId}
           onAddedComment={addedCommentHandler}
