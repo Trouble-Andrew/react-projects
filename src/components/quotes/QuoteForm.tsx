@@ -1,5 +1,5 @@
 import { Quote } from 'interfaces';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
@@ -11,8 +11,6 @@ interface QuoteFormProps {
 }
 
 const QuoteForm = (props: QuoteFormProps) => {
-  const [isEntered, setIsEntered] = useState(false);
-
   const authorInputRef = useRef<HTMLInputElement>(null);
   const textInputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -27,22 +25,10 @@ const QuoteForm = (props: QuoteFormProps) => {
     props.onAddQuote({ author: enteredAuthor, text: enteredText });
   }
 
-  const formFocusedHandler = () => {
-    setIsEntered(true);
-  };
-
-  const finishEnteringHandler = () => {
-    setIsEntered(false);
-  };
-
   return (
     <>
       <Card>
-        <form
-          onFocus={formFocusedHandler}
-          className={classes.form}
-          onSubmit={submitFormHandler}
-        >
+        <form className={classes.form} onSubmit={submitFormHandler}>
           {props.isLoading && (
             <div className={classes.loading}>
               <LoadingSpinner />
@@ -58,9 +44,7 @@ const QuoteForm = (props: QuoteFormProps) => {
             <textarea id="text" rows={5} ref={textInputRef}></textarea>
           </div>
           <div className={classes.actions}>
-            <button onClick={finishEnteringHandler} className="btn">
-              Add Quote
-            </button>
+            <button className="btn">Add Quote</button>
           </div>
         </form>
       </Card>
