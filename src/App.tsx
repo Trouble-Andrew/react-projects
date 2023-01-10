@@ -1,12 +1,22 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+import Navigation from './components/Nav/Navigation';
+import ProductsPage from './containers/Products';
+import FavoritesPage from './containers/Favorites';
+
+const App = () => {
   return (
-    <div>
-      <h2>Let's get started!</h2>
-      <p>This is also visible!</p>
-    </div>
+    <>
+      <Navigation />
+      <main>
+        <Routes>
+          <Route path="/" element={<ProductsPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+        </Routes>
+      </main>
+    </>
   );
-}
+};
 
 export default App;
