@@ -1,15 +1,12 @@
-import { RootState } from 'index';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { ProductsContext } from '../context/products-context';
 
 import ProductItem from '../components/Products/ProductItem';
-import { Product as ProductInterface } from 'interfaces';
 import './Products.scss';
 
 const Products = () => {
-  const productList = useSelector<RootState, ProductInterface[]>(
-    (state) => state.shop.products,
-  );
+  const productList = useContext(ProductsContext).products;
+  console.log(productList);
 
   return (
     <ul className="products-list">
